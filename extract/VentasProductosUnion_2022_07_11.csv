@@ -1,4 +1,4 @@
-venta,idproducto,cantidad,total,fecha,tipo pago,rating 1-10,comentarios,nombre,descripcion,precio venta,precio compra,proveedor
+venta,idproducto,cantidad,total,fecha,tipo pago,rating,comentarios,nombre,descripcion,precioVenta,precioCompra,proveedor
 1,1,2.0,90.0,10/7/2022,efectivo,7,Buen pan fresco,Pan bimbo,pan de trigo,45.0,40,bimbo
 11,1,1.0,45.0,10/7/2022,tarjeta,9,Muy buen pan,Pan bimbo,pan de trigo,45.0,40,bimbo
 2,15,,45.0,10/7/2022,efectivo,2,"Poco produco, malo en general",Ruflles,botana,15.0,13,sabritas

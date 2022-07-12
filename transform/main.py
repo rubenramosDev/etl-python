@@ -16,9 +16,9 @@ def main(file_name):
     logger.info('Iniciando Proceso de limpieza de Datos...')
     df = _read_data(file_name)
     
-    #df = _limpieza_datos(df)
-    #df = _obtener_tokens(df)
-    #df = _obtener_tokens_comentarios(df)
+    df = _limpieza_datos(df)
+    df = _obtener_tokens(df)
+    df = _obtener_tokens_comentarios(df)
     df = _agregar_fila_recomendado(df)
     df = _calcular_ganancia(df)
     df.set_index('venta',inplace=True)
@@ -35,7 +35,7 @@ def _limpieza_datos(df):
 
     #Limpieza de Cantidad
     missingTitlesMask = df['cantidad'].isna()
-    missing_tittles = (df[missingTitlesMask]['total']/df[missingTitlesMask]['precio venta'])
+    missing_tittles = (df[missingTitlesMask]['total']/df[missingTitlesMask]['precioVenta'])
     df.loc[missingTitlesMask, 'cantidad'] = missing_tittles.iloc[:len(missing_tittles)]
 
     #Limpieza de Fecha
