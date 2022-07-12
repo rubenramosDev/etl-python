@@ -25,11 +25,9 @@ def main(filename_1,filename_2):
     #Invocamos a la función para leer los datos.
     dfVentas = _read_data(filename_1)
     dfProductos = _read_data(filename_2)
-    #Invocamos a la funcion para  unir los dos dataframes
+    #Invocamos a la funcion para  unir los dos dataframes con un merge
     df = _join(dfVentas, dfProductos)
-    
-   
-   
+
     #Invocamos a la función que guarda los datos del DataFrame en un archivo csv
     _save_data_to_csv(df)
     
@@ -42,7 +40,7 @@ def main(filename_1,filename_2):
 def _read_data(file_name):
     logger.info('Leyendo el archivo {}'.format(file_name))
     #Leemos el archvo csv y lo devolvemos el data frame
-    return pd.read_csv(file_name, encoding=("latin1"))
+    return pd.read_csv(file_name, encoding=("utf-8"))
 
 
 ####################################################################
@@ -86,12 +84,6 @@ if __name__ == '__main__':
     args = parser.parse_args()
     df = main(args.filename_1, args.filename_2)
     print("-------------------------------------")
-  
-    #Creamos un nuevo parser de argumentos
-    #conn=pymysql.connect(host='127.0.0.1',port=int(3306),user='root',passwd='root',db='can_2021')
-
-    #df=pd.read_sql_query("SELECT * FROM cliente ",conn)
-
     print(df)
 
   
