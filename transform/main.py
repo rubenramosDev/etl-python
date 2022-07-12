@@ -20,7 +20,7 @@ def main(file_name):
     df = _limpieza_datos(df)
     df = _obtener_tokens(df)
     df = _obtener_tokens_comentarios(df)
-    df = _agregar_columna_recomendado(df)
+    df = _agregar_columna_valoracion(df)
     df = _calcular_ganancia(df)
     df.set_index('venta',inplace=True)
     _save_data_to_csv(df, file_name)
@@ -82,7 +82,7 @@ def _obtener_tokens_comentarios(df):
     df['token_pr_comentarios_cant'] = tokenize_column(df, 'comentario', isCant=True)
     df['token_pr_comentarios'] = tokenize_column(df, 'comentario')
     return df
-def _agregar_columna_recomendado(df):
+def agregar_columna_valoracion(df):
     logger.info('Obteniendo valoración del producto de acuerdo con el rating')
     conditionlist = [
     (df['rating'] <= 5) ,
