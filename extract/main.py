@@ -13,7 +13,7 @@ import pandas as pd
 #Importamos la librería nltk para extraer tokens del texto
 import nltk
 from nltk.corpus import stopwords
-import pymysql
+
 from functools import reduce   
 #Obtenemos una referencia al logger
 logger = logging.getLogger(__name__)
