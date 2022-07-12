@@ -1,13 +1,13 @@
-idproducto,nombre,descripcion,precio venta,precio compra,proveedor
+productoLlave,nombre,descripcion,precioVenta,precio compra,proveedor
 1,Pan bimbo,pan de trigo,45,40,bimbo
 2,Cereal Kellog's,cereal,83.5,80,Kellog's
 3,Nutella,dulce,60,55,
-4,Salsa macha,botana,20,10,Salsas méxico
-5,Salsa habanera,botana,35,32,Salsas méxico
+4,Salsa macha,botana,20,10,Salsas mï¿½xico
+5,Salsa habanera,botana,35,32,Salsas mï¿½xico
 6,Doritos,,15,14,sabritas
 7,Cereal Zucaritas,cereal,85,83,Kellog's
-8,Jamón de pavo,charcuteria,60,50,Fud
-9,Jamón de cerdo,charcuteria,50,48,Fud
+8,Jamï¿½n de pavo,charcuteria,60,50,Fud
+9,Jamï¿½n de cerdo,charcuteria,50,48,Fud
 10,Salchica de pavo,,40,30,Fud
 11,Tocino de cerdo,charcuteria,90,85,
 12,Pan integral,pan de trigo,50,40,bimbo

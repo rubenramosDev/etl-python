@@ -1,50 +1,55 @@
 #Importamos las clses que necesitamos de sqlalchemy
-from tokenize import Double
-from xmlrpc.client import DateTime
 from sqlalchemy import Column, String, Integer
 #Importamos al objeto Base
 from base import Base
 
 #Declaramos la clase Artículo que hereda a Base
 class ProductoVenta(Base):
-    __tablename__ = 'producto_venta'
+    __tablename__ = 'productoventa'
     #Definicion de columnass
     venta = Column(Integer, primary_key = True)
-    idProducto = Column(Integer)
+    productoLlave = Column(Integer)
+    nombre = Column(String)
     cantidad = Column(Integer)
-    total = Column(Double)
-    fecha = Column(DateTime)
+    total = Column(String)
+    fecha = Column(String)
     tipoPago = Column(String)
     rating = Column(Integer)
-    nombre = Column(String)
-    comentario = Column(String)
+    valoracion = Column(String)
     descripcion = Column(String)
-    precio = Column(Double)
+    precioVenta = Column(String)
     proveedor = Column(String)
+    comentario = Column(String)
     
-    def __init__(self,venta,
-                            idProducto,
+    
+    def __init__(self,      venta,
+                            productoLlave,
+                            nombre,
                             cantidad,
                             total,
                             fecha,
                             tipoPago,
                             rating,
-                            nombre,
-                            comentario,
+                            valoracion,
                             descripcion,
-                            precio,
-                            proveedor):
+                            precioVenta,
+                            proveedor,
+                            comentario
+                            
+                            ):
         self.venta = venta
-        self.idProducto = idProducto
+        self.productoLlave = productoLlave
+        self.nombre = nombre
         self.cantidad = cantidad
         self.total = total
         self.fecha = fecha
         self.tipoPago = tipoPago
         self.rating = rating
-        self.nombre = nombre
-        self.comentario = comentario
+        self.valoracion = valoracion
         self.descripcion = descripcion
-        self.precio = precio
+        self.precioVenta = precioVenta
         self.proveedor = proveedor
+        self.comentario = comentario
+        
     
     
