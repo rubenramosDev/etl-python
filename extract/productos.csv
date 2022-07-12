@@ -1,4 +1,4 @@
-productoLlave,nombre,descripcion,precioVenta,precio compra,proveedor
+productoLlave,nombre,descripcion,precioVenta,precioCompra,proveedor
 1,Pan bimbo,pan de trigo,45,40,bimbo
 2,Cereal Kellog's,cereal,83.5,80,Kellog's
 3,Nutella,dulce,60,55,

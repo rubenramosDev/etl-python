@@ -14,10 +14,12 @@ class ProductoVenta(Base):
     total = Column(String)
     fecha = Column(String)
     tipoPago = Column(String)
+    ganancia = Column(String)
     rating = Column(Integer)
     valoracion = Column(String)
     descripcion = Column(String)
     precioVenta = Column(String)
+    precioCompra = Column(String)
     proveedor = Column(String)
     comentario = Column(String)
     
@@ -29,10 +31,12 @@ class ProductoVenta(Base):
                             total,
                             fecha,
                             tipoPago,
+                            ganancia,
                             rating,
                             valoracion,
                             descripcion,
                             precioVenta,
+                            precioCompra,
                             proveedor,
                             comentario
                             
@@ -44,10 +48,12 @@ class ProductoVenta(Base):
         self.total = total
         self.fecha = fecha
         self.tipoPago = tipoPago
+        self.ganancia =ganancia
         self.rating = rating
         self.valoracion = valoracion
         self.descripcion = descripcion
         self.precioVenta = precioVenta
+        self.precioCompra = precioCompra
         self.proveedor = proveedor
         self.comentario = comentario
         

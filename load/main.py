@@ -31,12 +31,15 @@ def main(filename):
                                  row['total'],
                                  row['fecha'],
                                  row['tipoPago'],
+                                 row['ganancia'],
                                  row['rating'],
                                  row['valoracion'],
                                  row['descripcion'],
                                  row['precioVenta'],
+                                 row['precioCompra'],
                                  row['proveedor'],
                                  row['comentario']
+                                 
                                  
                                  )
 

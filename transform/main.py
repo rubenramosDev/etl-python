@@ -19,7 +19,7 @@ def main(file_name):
     #df = _obtener_tokens(df)
     #df = _obtener_tokens_comentarios(df)
     df = _agregar_fila_recomendado(df)
-    #df = _calcular_ganancia(df)
+    df = _calcular_ganancia(df)
     df.set_index('venta',inplace=True)
     _save_data_to_csv(df, file_name)
     
@@ -44,8 +44,17 @@ def _agregar_fila_recomendado(df):
     choicelist = ['Malo', 'Regular', 'Bueno']
     df['valoracion'] = np.select(conditionlist, choicelist, default='Not Specified')
     return df
-def _calcular_ganancia():
-    return 0  
+
+####################################################################
+#              Función para calcular la ganancia de ventas            #
+####################################################################
+def _calcular_ganancia(df):
+    col_precio_venta = df['precioVenta']
+    col_precio_compra = df['precioCompra']
+    
+    df['ganancia'] = col_precio_venta - col_precio_compra
+    return df
+
 def _save_data_to_csv(df, filename):
     clean_filename = 'clean_{}'.format(filename)
     logger.info('Guardando los datos limpios en el archivo: {}'.format(clean_filename))
