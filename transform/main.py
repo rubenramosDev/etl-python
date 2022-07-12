@@ -126,7 +126,7 @@ def tokenize_column(df, column_name, isCant = False):
                 .apply(lambda tokens: list(filter(lambda token: token.isalpha(), tokens)))
                 .apply(lambda tokens: list(map(lambda token: token.lower(), tokens)))
                 .apply(lambda word_list: list(filter(lambda word: word not in stop_words, word_list)))
-                .apply(lambda valid_word_list: valid_word_list)
+                .apply(lambda valid_word_list: ",".join(valid_word_list))
                 )
 
 # Inicio de la aplicación #
