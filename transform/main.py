@@ -47,16 +47,16 @@ def _limpieza_datos(df):
     df.loc[missingTitlesMask, 'fecha'] = missing_tittles.iloc[:len(missing_tittles)]
 
     #Limpieza de Tipo de Pago
-    missingTitlesMask = df['tipo pago'].isna()
-    missing_tittles = (df[missingTitlesMask]['tipo pago'])
+    missingTitlesMask = df['tipoPago'].isna()
+    missing_tittles = (df[missingTitlesMask]['tipoPago'])
     missing_tittles = df.fillna(value='Sin especificar')
-    df.loc[missingTitlesMask, 'tipo pago'] = missing_tittles.iloc[:len(missing_tittles)]
+    df.loc[missingTitlesMask, 'tipoPago'] = missing_tittles.iloc[:len(missing_tittles)]
 
     #Limpieza de Comentarios
-    missingTitlesMask = df['comentarios'].isna()
-    missing_tittles = (df[missingTitlesMask]['comentarios'])
+    missingTitlesMask = df['comentario'].isna()
+    missing_tittles = (df[missingTitlesMask]['comentario'])
     missing_tittles = df.fillna(value='Sin comentarios')
-    df.loc[missingTitlesMask, 'comentarios'] = missing_tittles.iloc[:len(missing_tittles)]
+    df.loc[missingTitlesMask, 'comentario'] = missing_tittles.iloc[:len(missing_tittles)]
 
     #Limpieza de Descripcion
     missingTitlesMask = df['descripcion'].isna()
