@@ -16,11 +16,12 @@ def main(file_name):
     logger.info('Iniciando Proceso de limpieza de Datos...')
     df = _read_data(file_name)
     
-    #df = _limpieza_datos(df)
-    #df = _obtener_tokens(df)
-    #df = _obtener_tokens_comentarios(df)
-    #df = _agregar_fila_recomendado(df)
-    #df = _calcular_ganancia(df)
+
+    df = _limpieza_datos(df)
+    df = _obtener_tokens(df)
+    df = _obtener_tokens_comentarios(df)
+    df = _agregar_fila_recomendado(df)
+    df = _calcular_ganancia(df)
     df.set_index('venta',inplace=True)
     _save_data_to_csv(df, file_name)
     
@@ -31,11 +32,11 @@ def _read_data(file_name):
     #Leemos el archvo csv y lo devolvemos el data frame
     return pd.read_csv(file_name,  encoding = 'utf-8')
 
-def _limpieza_datos():
+def _limpieza_datos(df):
 
     #Limpieza de Cantidad
     missingTitlesMask = df['cantidad'].isna()
-    missing_tittles = (df[missingTitlesMask]['total']/df[missingTitlesMask]['precio venta'])
+    missing_tittles = (df[missingTitlesMask]['total']/df[missingTitlesMask]['precioVenta'])
     df.loc[missingTitlesMask, 'cantidad'] = missing_tittles.iloc[:len(missing_tittles)]
 
     #Limpieza de Fecha
@@ -71,10 +72,14 @@ def _limpieza_datos():
 
     return df
 
-def _obtener_tokens():
-    return 0
-def _obtener_tokens_comentarios():
-    return 0
+def _obtener_tokens(df):
+    df['token_pr_nombre_cant'] = tokenize_column(df, 'nombre', isCant=True)
+    df['token_pr_nombre'] = tokenize_column(df, 'nombre')
+    return df
+def _obtener_tokens_comentarios(df):
+    df['token_pr_comentarios_cant'] = tokenize_column(df, 'comentarios', isCant=True)
+    df['token_pr_comentarios'] = tokenize_column(df, 'comentarios')
+    return df
 def _agregar_fila_recomendado(df):
     conditionlist = [
     (df['rating'] <= 5) ,
@@ -98,6 +103,31 @@ def _save_data_to_csv(df, filename):
     clean_filename = 'clean_{}'.format(filename)
     logger.info('Guardando los datos limpios en el archivo: {}'.format(clean_filename))
     df.to_csv(clean_filename)
+    
+stop_words = set(stopwords.words('spanish'))
+def tokenize_column(df, column_name, isCant = False):
+    """
+    Genera columnas con los tokens encontrados por cada fila de la columna de un DT
+    params:
+    df: DataFrame de informacion
+    column_name: Nombre de la columna a tokenizar
+    
+    return:
+    Columna con los tokens de cada fila
+    """
+    return (df.dropna()
+                .apply(lambda row: nltk.word_tokenize(row[column_name]), axis=1)
+                .apply(lambda tokens: list(filter(lambda token: token.isalpha(), tokens)))
+                .apply(lambda tokens: list(map(lambda token: token.lower(), tokens)))
+                .apply(lambda word_list: list(filter(lambda word: word not in stop_words, word_list)))
+                .apply(lambda valid_word_list: len(valid_word_list))
+                ) if isCant else (df.dropna()
+                .apply(lambda row: nltk.word_tokenize(row[column_name]), axis=1)
+                .apply(lambda tokens: list(filter(lambda token: token.isalpha(), tokens)))
+                .apply(lambda tokens: list(map(lambda token: token.lower(), tokens)))
+                .apply(lambda word_list: list(filter(lambda word: word not in stop_words, word_list)))
+                .apply(lambda valid_word_list: valid_word_list)
+                )
 
 # Inicio de la aplicación #
 if __name__ == '__main__':
