@@ -16,7 +16,7 @@ def main(file_name):
     logger.info('Iniciando Proceso de limpieza de Datos...')
     df = _read_data(file_name)
     
-    #df = _limpieza_datos(df)
+    df = _limpieza_datos(df)
     #df = _obtener_tokens(df)
     #df = _obtener_tokens_comentarios(df)
     df = _agregar_fila_recomendado(df)
