@@ -29,10 +29,14 @@ def _read_data(file_name):
 
 def _limpieza_datos():
     return 0
-def _obtener_tokens():
-    return 0
-def _obtener_tokens_comentarios():
-    return 0
+def _obtener_tokens(df):
+    df['token_pr_nombre_cant'] = tokenize_column(df, 'nombre', isCant=True)
+    df['token_pr_nombre'] = tokenize_column(df, 'nombre')
+    return df
+def _obtener_tokens_comentarios(df):
+    df['token_pr_comentarios_cant'] = tokenize_column(df, 'comentarios', isCant=True)
+    df['token_pr_comentarios'] = tokenize_column(df, 'comentarios')
+    return df
 def _agregar_fila_recomendado():
     return 0
 
@@ -50,6 +54,31 @@ def _save_data_to_csv(df, filename):
     clean_filename = 'clean_{}'.format(filename)
     logger.info('Guardando los datos limpios en el archivo: {}'.format(clean_filename))
     df.to_csv(clean_filename)
+    
+stop_words = set(stopwords.words('spanish'))
+def tokenize_column(df, column_name, isCant = False):
+    """
+    Genera columnas con los tokens encontrados por cada fila de la columna de un DT
+    params:
+    df: DataFrame de informacion
+    column_name: Nombre de la columna a tokenizar
+    
+    return:
+    Columna con los tokens de cada fila
+    """
+    return (df.dropna()
+                .apply(lambda row: nltk.word_tokenize(row[column_name]), axis=1)
+                .apply(lambda tokens: list(filter(lambda token: token.isalpha(), tokens)))
+                .apply(lambda tokens: list(map(lambda token: token.lower(), tokens)))
+                .apply(lambda word_list: list(filter(lambda word: word not in stop_words, word_list)))
+                .apply(lambda valid_word_list: len(valid_word_list))
+                ) if isCant else (df.dropna()
+                .apply(lambda row: nltk.word_tokenize(row[column_name]), axis=1)
+                .apply(lambda tokens: list(filter(lambda token: token.isalpha(), tokens)))
+                .apply(lambda tokens: list(map(lambda token: token.lower(), tokens)))
+                .apply(lambda word_list: list(filter(lambda word: word not in stop_words, word_list)))
+                .apply(lambda valid_word_list: valid_word_list)
+                )
 
 # Inicio de la aplicación #
 if __name__ == '__main__':
