@@ -4,6 +4,7 @@ logging.basicConfig(level=logging.INFO)
 import hashlib
 from urllib.parse import urlparse
 import pandas as pd
+import numpy as np
 import nltk
 from nltk.corpus import stopwords
 from datetime import datetime
@@ -15,12 +16,14 @@ def main(file_name):
     logger.info('Iniciando Proceso de limpieza de Datos...')
     df = _read_data(file_name)
     
-    df = _limpieza_datos(df)
-    df = _obtener_tokens(df)
-    df = _obtener_tokens_comentarios(df)
+    #df = _limpieza_datos(df)
+    #df = _obtener_tokens(df)
+    #df = _obtener_tokens_comentarios(df)
     df = _agregar_fila_recomendado(df)
     df = _calcular_ganancia(df)
+    df.set_index('venta',inplace=True)
     _save_data_to_csv(df, file_name)
+    
     return df
 
 def _read_data(file_name):
@@ -72,10 +75,25 @@ def _obtener_tokens():
     return 0
 def _obtener_tokens_comentarios():
     return 0
-def _agregar_fila_recomendado():
-    return 0
-def _calcular_ganancia():
-    return 0  
+def _agregar_fila_recomendado(df):
+    conditionlist = [
+    (df['rating'] <= 5) ,
+    (df['rating'] <= 7),
+    (df['rating'] > 7)]
+    choicelist = ['Malo', 'Regular', 'Bueno']
+    df['valoracion'] = np.select(conditionlist, choicelist, default='Not Specified')
+    return df
+
+####################################################################
+#              Función para calcular la ganancia de ventas            #
+####################################################################
+def _calcular_ganancia(df):
+    col_precio_venta = df['precioVenta']
+    col_precio_compra = df['precioCompra']
+    
+    df['ganancia'] = col_precio_venta - col_precio_compra
+    return df
+
 def _save_data_to_csv(df, filename):
     clean_filename = 'clean_{}'.format(filename)
     logger.info('Guardando los datos limpios en el archivo: {}'.format(clean_filename))

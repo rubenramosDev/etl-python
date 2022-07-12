@@ -8,7 +8,8 @@ logging.basicConfig(level=logging.INFO)
 #Obtenemos una referencia al logger
 logger = logging.getLogger(__name__)
 
-
+nombre1 = "ventas.csv"
+nombre2 = "productos.csv"
 ####################################################################
 #              Función principal paso a paso                       #
 ####################################################################
@@ -23,7 +24,7 @@ def main():
 ####################################################################
 def _extract():
     logger.info('..::Iniciando el proceso de extracción::..')
-    subprocess.run(['python', 'main.py'], cwd='./extract')   
+    subprocess.run(['python', 'main.py', nombre1, nombre2], cwd='./extract')
     subprocess.run(['move', r'extract\*.csv', r'transform'], shell=True)
         
 ####################################################################
@@ -47,15 +48,14 @@ def _transform():
 def _load():
     logger.info('..::Iniciando el proceso de carga::..')
     now = datetime.datetime.now().strftime('%Y_%m_%d')
-    
-    for news_site_uid in news_sites_uids:
-        clean_data_filename = 'clean_{}_{datetime}_articles.csv'.format(
-             news_site_uid, datetime=now)
-        #Corremos un subproceso para ejecutar el tercer programa en la carpeta /extract
-        subprocess.run(
+
+    clean_data_filename = 'clean_VentasProductosUnion_{datetime}.csv'.format(
+             datetime=now)
+    #Corremos un subproceso para ejecutar el tercer programa en la carpeta /extract
+    subprocess.run(
             ['python', 'main.py', clean_data_filename], cwd='./load')
-        #Eliminar el archivo csv limpio
-        subprocess.run(['del', clean_data_filename], shell=True, cwd='./load')
+    #Eliminar el archivo csv limpio
+    subprocess.run(['del', clean_data_filename], shell=True, cwd='./load')
        
 if __name__ == '__main__':
     main()

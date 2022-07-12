@@ -18,24 +18,32 @@ def main(filename):
     session = Session()
     # Leemos nuestro archivo cvs
     productos = pd.read_csv(filename, encoding='utf-8')
-
-    # Iteramos entre las filas de cvs mediante el metodo iterrows() y vamos carfando
-    # los articulos a la base de datos.
+    
+    # Iteramos entre las filas de cvs mediante el metodo iterrows() y vamos cargando
+    # los registros a la base de datos.
     for index, row in productos.iterrows():
         logger.info(
             'Cargando el producto con el id: {} en la BD'.format(row['venta']))
         producto = ProductoVenta(row['venta'],
-                                 row['idProducto'],
+                                 row['productoLlave'],
+                                 row['nombre'],
                                  row['cantidad'],
                                  row['total'],
                                  row['fecha'],
                                  row['tipoPago'],
+                                 row['ganancia'],
                                  row['rating'],
-                                 row['nombre'],
-                                 row['comentario'],
+                                 row['valoracion'],
                                  row['descripcion'],
-                                 row['precio'],
-                                 row['proveedor'])
+                                 row['precioVenta'],
+                                 row['precioCompra'],
+                                 row['proveedor'],
+                                 row['comentario'],
+                                 row['token_pr_nombre_cant'],
+                                 row['token_pr_nombre'],
+                                 row['token_pr_comentarios_cant'],
+                                 row['token_pr_comentarios']    
+                                 )
 
         session.add(producto)
         session.commit()

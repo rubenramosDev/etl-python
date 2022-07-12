@@ -1,50 +1,71 @@
 #Importamos las clses que necesitamos de sqlalchemy
-from tokenize import Double
-from xmlrpc.client import DateTime
 from sqlalchemy import Column, String, Integer
 #Importamos al objeto Base
 from base import Base
 
 #Declaramos la clase Artículo que hereda a Base
 class ProductoVenta(Base):
-    __tablename__ = 'producto_venta'
+    __tablename__ = 'productoventa'
     #Definicion de columnass
     venta = Column(Integer, primary_key = True)
-    idProducto = Column(Integer)
-    cantidad = Column(Integer)
-    total = Column(Double)
-    fecha = Column(DateTime)
-    tipoPago = Column(String)
-    rating = Column(Integer)
+    productoLlave = Column(Integer)
     nombre = Column(String)
-    comentario = Column(String)
+    cantidad = Column(Integer)
+    total = Column(String)
+    fecha = Column(String)
+    tipoPago = Column(String)
+    ganancia = Column(String)
+    rating = Column(Integer)
+    valoracion = Column(String)
     descripcion = Column(String)
-    precio = Column(Double)
+    precioVenta = Column(String)
+    precioCompra = Column(String)
     proveedor = Column(String)
+    comentario = Column(String)
+    token_pr_nombre_cant = Column(Integer)
+    token_pr_nombre = Column(String)
+    token_pr_comentarios_cant = Column(Integer)
+    token_pr_comentarios = Column(String)
     
-    def __init__(self,venta,
-                            idProducto,
+    
+    def __init__(self,      venta,
+                            productoLlave,
+                            nombre,
                             cantidad,
                             total,
                             fecha,
                             tipoPago,
+                            ganancia,
                             rating,
-                            nombre,
-                            comentario,
+                            valoracion,
                             descripcion,
-                            precio,
-                            proveedor):
+                            precioVenta,
+                            precioCompra,
+                            proveedor,
+                            comentario,
+                            token_pr_nombre_cant,
+                            token_pr_nombre,
+                            token_pr_comentarios_cant,
+                            token_pr_comentarios
+                            ):
         self.venta = venta
-        self.idProducto = idProducto
+        self.productoLlave = productoLlave
+        self.nombre = nombre
         self.cantidad = cantidad
         self.total = total
         self.fecha = fecha
         self.tipoPago = tipoPago
+        self.ganancia =ganancia
         self.rating = rating
-        self.nombre = nombre
-        self.comentario = comentario
+        self.valoracion = valoracion
         self.descripcion = descripcion
-        self.precio = precio
+        self.precioVenta = precioVenta
+        self.precioCompra = precioCompra
         self.proveedor = proveedor
-    
+        self.comentario = comentario
+        self.token_pr_nombre_cant = token_pr_nombre_cant
+        self.token_pr_nombre = token_pr_nombre
+        self.token_pr_comentarios_cant = token_pr_comentarios_cant
+        self.token_pr_comentarios = token_pr_comentarios
+        
     
