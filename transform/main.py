@@ -91,10 +91,6 @@ def _agregar_fila_recomendado(df):
     choicelist = ['Malo', 'Regular', 'Bueno']
     df['valoracion'] = np.select(conditionlist, choicelist, default='Not Specified')
     return df
-
-####################################################################
-#              Función para calcular la ganancia de ventas            #
-####################################################################
 def _calcular_ganancia(df):
     logger.info('Obteniendo ganancia de cada venta')
     col_precio_venta = df['precioVenta']
