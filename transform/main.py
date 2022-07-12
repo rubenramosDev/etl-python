@@ -33,7 +33,7 @@ def _read_data(file_name):
     return pd.read_csv(file_name,  encoding = 'utf-8')
 
 def _limpieza_datos(df):
-
+    logger.info('Remplazando campos vacios ')
     #Limpieza de Cantidad
     missingTitlesMask = df['cantidad'].isna()
     missing_tittles = (df[missingTitlesMask]['total']/df[missingTitlesMask]['precioVenta'])
@@ -73,14 +73,17 @@ def _limpieza_datos(df):
     return df
 
 def _obtener_tokens(df):
+    logger.info('Obteniendo cantidad y tokens del nombre del producto')
     df['token_pr_nombre_cant'] = tokenize_column(df, 'nombre', isCant=True)
     df['token_pr_nombre'] = tokenize_column(df, 'nombre')
     return df
 def _obtener_tokens_comentarios(df):
+    logger.info('Obteniendo cantidad y tokens de los comentarios del producto')
     df['token_pr_comentarios_cant'] = tokenize_column(df, 'comentario', isCant=True)
     df['token_pr_comentarios'] = tokenize_column(df, 'comentario')
     return df
 def _agregar_fila_recomendado(df):
+    logger.info('Obteniendo valoración del producto de acuerdo con el rating')
     conditionlist = [
     (df['rating'] <= 5) ,
     (df['rating'] <= 7),
@@ -93,6 +96,7 @@ def _agregar_fila_recomendado(df):
 #              Función para calcular la ganancia de ventas            #
 ####################################################################
 def _calcular_ganancia(df):
+    logger.info('Obteniendo ganancia de cada venta')
     col_precio_venta = df['precioVenta']
     col_precio_compra = df['precioCompra']
     
