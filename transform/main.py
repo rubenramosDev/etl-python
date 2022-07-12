@@ -55,7 +55,7 @@ def _limpieza_datos(df):
     #Limpieza de Comentarios
     missingTitlesMask = df['comentario'].isna()
     missing_tittles = (df[missingTitlesMask]['comentario'])
-    missing_tittles = df.fillna(value='Sin comentario')
+    missing_tittles = df.fillna(value='Sin comentarios')
     df.loc[missingTitlesMask, 'comentario'] = missing_tittles.iloc[:len(missing_tittles)]
 
     #Limpieza de Descripcion
