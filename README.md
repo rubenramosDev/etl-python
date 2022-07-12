@@ -1,8 +1,8 @@
 # Pendientes
 
 ## Sobre datasets
-1.- Limpieza de datos -Completar cantidad - Christopher
-2.- Tokens nombre y descripcion - 
+- Limpieza de datos -Completar cantidad - Christopher   
+- Tokens nombre y descripcion   
 3.- Producto recomendable (<=5 es malo, <=7 es regular, > 7 es bueno) es función del raiting
 4.- Tokens de los comnetaros
 5.- Ganancias. Sobre precio compra y precio venta
