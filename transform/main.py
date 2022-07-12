@@ -19,8 +19,8 @@ def main(file_name):
     #df = _limpieza_datos(df)
     #df = _obtener_tokens(df)
     #df = _obtener_tokens_comentarios(df)
-    df = _agregar_fila_recomendado(df)
-    df = _calcular_ganancia(df)
+    #df = _agregar_fila_recomendado(df)
+    #df = _calcular_ganancia(df)
     df.set_index('venta',inplace=True)
     _save_data_to_csv(df, file_name)
     
