@@ -27,6 +27,7 @@ def main(filename_1,filename_2):
     dfProductos = _read_data(filename_2)
     #Invocamos a la funcion para  unir los dos dataframes
     df = _join(dfVentas, dfProductos)
+    
    
    
     #Invocamos a la función que guarda los datos del DataFrame en un archivo csv
@@ -50,7 +51,7 @@ def _read_data(file_name):
 def _join(dfVentas, dfProductos):
     data_merge= reduce(lambda left, right:     # Merge three pandas DataFrames
                      pd.merge(left , right,
-                              on = ["idproducto"]),
+                              on = ["productoLlave"]),
                      [dfVentas, dfProductos])
     data_merge.set_index('venta',inplace=True)
 
