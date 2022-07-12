@@ -1,0 +1,2 @@
+1. Ejecutar main de extract: 
+python main.py ventas.csv productos.csv
