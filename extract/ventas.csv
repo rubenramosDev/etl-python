@@ -1,16 +1,16 @@
-venta,idproducto,cantidad,total,fecha,tipo pago
-1,1,2,90,10/7/2022,efectivo
-2,15,,45,10/7/2022,efectivo
-3,7,1,85,9/7/2022,efectivo
-4,6,2,30,,efectivo
-5,5,,350,,
-6,9,1,50,15/6/2022,tarjeta
-7,8,1,60,14/6/2022,tarjeta
-8,12,2,100,9/7/2022,efectivo
-9,11,,180,8/7/2022,tarjeta
-10,11,1,90,6/7/2022,efectivo
-11,1,1,45,10/7/2022,tarjeta
-12,2,,334,,efectivo
-13,3,2,120,,
-14,5,1,35,10/7/2022,efectivo
-15,2,1,83.5,9/7/2022,
+venta,idproducto,cantidad,total,fecha,tipo pago,rating 1-10,comentarios
+1,1,2,90,10/7/2022,efectivo,7,Buen pan fresco
+2,15,,45,10/7/2022,efectivo,2,"Poco produco, malo en general"
+3,7,1,85,9/7/2022,efectivo,5,Muy rico pero mucha azúcar
+4,6,2,30,,efectivo,6,
+5,5,,350,,,10,Muy buena salsa
+6,9,1,50,15/6/2022,tarjeta,4,Tiene mal sabor
+7,8,1,60,14/6/2022,tarjeta,10,Fresco muy bueno
+8,12,2,100,9/7/2022,efectivo,10,Excelente 
+9,11,,180,8/7/2022,tarjeta,9,Muy buen producto
+10,11,1,90,6/7/2022,efectivo,7,"Malo, mucha grasa"
+11,1,1,45,10/7/2022,tarjeta,9,Muy buen pan
+12,2,,334,,efectivo,8,Regular
+13,3,2,120,,,10,Muy rico
+14,5,1,35,10/7/2022,efectivo,8,Producto regular
+15,2,1,83.5,9/7/2022,,2,Muy mal producto
