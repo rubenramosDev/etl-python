@@ -82,7 +82,7 @@ def _obtener_tokens_comentarios(df):
     df['token_pr_comentarios_cant'] = tokenize_column(df, 'comentario', isCant=True)
     df['token_pr_comentarios'] = tokenize_column(df, 'comentario')
     return df
-def agregar_columna_valoracion(df):
+def _agregar_columna_valoracion(df):
     logger.info('Obteniendo valoración del producto de acuerdo con el rating')
     conditionlist = [
     (df['rating'] <= 5) ,
