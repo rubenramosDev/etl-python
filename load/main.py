@@ -38,9 +38,11 @@ def main(filename):
                                  row['precioVenta'],
                                  row['precioCompra'],
                                  row['proveedor'],
-                                 row['comentario']
-                                 
-                                 
+                                 row['comentario'],
+                                 row['token_pr_nombre_cant'],
+                                 row['token_pr_nombre'],
+                                 row['token_pr_comentarios_cant'],
+                                 row['token_pr_comentarios']    
                                  )
 
         session.add(producto)

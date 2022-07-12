@@ -22,6 +22,10 @@ class ProductoVenta(Base):
     precioCompra = Column(String)
     proveedor = Column(String)
     comentario = Column(String)
+    token_pr_nombre_cant = Column(Integer)
+    token_pr_nombre = Column(String)
+    token_pr_comentarios_cant = Column(Integer)
+    token_pr_comentarios = Column(String)
     
     
     def __init__(self,      venta,
@@ -38,8 +42,11 @@ class ProductoVenta(Base):
                             precioVenta,
                             precioCompra,
                             proveedor,
-                            comentario
-                            
+                            comentario,
+                            token_pr_nombre_cant,
+                            token_pr_nombre,
+                            token_pr_comentarios_cant,
+                            token_pr_comentarios
                             ):
         self.venta = venta
         self.productoLlave = productoLlave
@@ -56,6 +63,9 @@ class ProductoVenta(Base):
         self.precioCompra = precioCompra
         self.proveedor = proveedor
         self.comentario = comentario
+        self.token_pr_nombre_cant = token_pr_nombre_cant
+        self.token_pr_nombre = token_pr_nombre
+        self.token_pr_comentarios_cant = token_pr_comentarios_cant
+        self.token_pr_comentarios = token_pr_comentarios
         
-    
     
