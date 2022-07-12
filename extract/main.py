@@ -1,5 +1,6 @@
 #Importamos la librería argparse para generar un CLI
 import argparse
+import datetime
 #Importamos la librería loggig para mostrar mensajes al usuario
 import logging
 logging.basicConfig(level=logging.INFO)
@@ -61,9 +62,11 @@ def _join(dfVentas, dfProductos):
 # Función que guarda los datos del DataFrame en un archivo csv #
 ##################################################################################
 def _save_data_to_csv(df):
-    filename = '{}'.format("VentasProductos")
-    logger.info('Guardando el dataset: {}'.format(filename))
-    df.to_csv(filename)
+    now = datetime.datetime.now().strftime('%Y_%m_%d')
+    out_file_name = 'VentasProductosUnion_{fdatetime}.csv'.format(
+         fdatetime=now)
+    logger.info('Guardando el dataset: {}'.format(out_file_name))
+    df.to_csv(out_file_name)
 
 ##################################################################################
 # Inicio de la aplicación #
