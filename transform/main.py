@@ -6,6 +6,7 @@ from urllib.parse import urlparse
 import pandas as pd
 import nltk
 from nltk.corpus import stopwords
+from datetime import datetime
 
 #Obtenemos una referencia al logger
 logger = logging.getLogger(__name__)
@@ -28,7 +29,45 @@ def _read_data(file_name):
     return pd.read_csv(file_name,  encoding = 'utf-8')
 
 def _limpieza_datos():
-    return 0
+
+    #Limpieza de Cantidad
+    missingTitlesMask = df['cantidad'].isna()
+    missing_tittles = (df[missingTitlesMask]['total']/df[missingTitlesMask]['precio venta'])
+    df.loc[missingTitlesMask, 'cantidad'] = missing_tittles.iloc[:len(missing_tittles)]
+
+    #Limpieza de Fecha
+    missingTitlesMask = df['fecha'].isna()
+    today = (datetime.today().strftime('%d/%m/%Y'))
+    missing_tittles = (df[missingTitlesMask]['fecha'])
+    missing_tittles = df.fillna(value=today)
+    df.loc[missingTitlesMask, 'fecha'] = missing_tittles.iloc[:len(missing_tittles)]
+
+    #Limpieza de Tipo de Pago
+    missingTitlesMask = df['tipo pago'].isna()
+    missing_tittles = (df[missingTitlesMask]['tipo pago'])
+    missing_tittles = df.fillna(value='Sin especificar')
+    df.loc[missingTitlesMask, 'tipo pago'] = missing_tittles.iloc[:len(missing_tittles)]
+
+    #Limpieza de Comentarios
+    missingTitlesMask = df['comentarios'].isna()
+    missing_tittles = (df[missingTitlesMask]['comentarios'])
+    missing_tittles = df.fillna(value='Sin comentarios')
+    df.loc[missingTitlesMask, 'comentarios'] = missing_tittles.iloc[:len(missing_tittles)]
+
+    #Limpieza de Descripcion
+    missingTitlesMask = df['descripcion'].isna()
+    missing_tittles = (df[missingTitlesMask]['descripcion'])
+    missing_tittles = df.fillna(value='Sin informacion')
+    df.loc[missingTitlesMask, 'descripcion'] = missing_tittles.iloc[:len(missing_tittles)]
+
+    #Limpieza de Proveedores
+    missingTitlesMask = df['proveedor'].isna()
+    missing_tittles = (df[missingTitlesMask]['proveedor'])
+    missing_tittles = df.fillna(value='Anonimo')
+    df.loc[missingTitlesMask, 'proveedor'] = missing_tittles.iloc[:len(missing_tittles)]
+
+    return df
+
 def _obtener_tokens():
     return 0
 def _obtener_tokens_comentarios():
