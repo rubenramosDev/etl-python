@@ -35,8 +35,17 @@ def _obtener_tokens_comentarios():
     return 0
 def _agregar_fila_recomendado():
     return 0
-def _calcular_ganancia():
-    return 0  
+
+####################################################################
+#              Función para calcular la ganancia de ventas            #
+####################################################################
+def _calcular_ganancia(df):
+    col_precio_venta = df['precio venta']
+    col_precio_compra = df['precio compra']
+    
+    df['ganancia'] = col_precio_venta - col_precio_compra
+    return df
+
 def _save_data_to_csv(df, filename):
     clean_filename = 'clean_{}'.format(filename)
     logger.info('Guardando los datos limpios en el archivo: {}'.format(clean_filename))
