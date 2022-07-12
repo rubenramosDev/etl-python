@@ -40,7 +40,7 @@ def main(filename_1,filename_2):
 def _read_data(file_name):
     logger.info('Leyendo el archivo {}'.format(file_name))
     #Leemos el archvo csv y lo devolvemos el data frame
-    return pd.read_csv(file_name, encoding=("utf-8"))
+    return pd.read_csv(file_name, encoding=("latin1"))
 
 
 ####################################################################
