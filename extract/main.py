@@ -51,6 +51,8 @@ def _join(dfVentas, dfProductos):
                      pd.merge(left , right,
                               on = ["idproducto"]),
                      [dfVentas, dfProductos])
+    data_merge.set_index('venta',inplace=True)
+
     data_merge   
     return data_merge
  
