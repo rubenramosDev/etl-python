@@ -1,6 +1,7 @@
 # Pendientes
 
-## Sobre datasets
+## Sobre 
+### Ejecucion
 - Limpieza de datos -Completar cantidad - Christopher   
 - Tokens nombre y descripcion  - Jona
 - Producto recomendable (<=5 es malo, <=7 es regular, > 7 es bueno) es función del raiting - Anahí
