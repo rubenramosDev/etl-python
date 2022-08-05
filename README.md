@@ -1,8 +1,8 @@
 # Pendientes
 
 # Extract
-- [ ] Conectar con la base de datos ya se a de manera local o remota
-- [ ] Consultar todas las respuestas, permitiendo manejar los siguientes filtros. 1.Todas las carreras 1. Ingeniería en Desarrollo y Gestión de Software 2. Ingeniería en Redes y Ciberseguridad 3. Ingeniería en Entornos Virtuales y Negocios Digitales
+- [x] Conectar con la base de datos ya se a de manera local o remota
+- [x] Consultar todas las respuestas, permitiendo manejar los siguientes filtros. 1.Todas las carreras 1. Ingeniería en Desarrollo y Gestión de Software 2. Ingeniería en Redes y Ciberseguridad 3. Ingeniería en Entornos Virtuales y Negocios Digitales
 
 # Transform
 - [ ] A partir de los datos obtenidos en la etapa anterior realizar las transformaciones necesarias para obtener un data set con las siguientes columnas.
