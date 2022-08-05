@@ -62,14 +62,15 @@ def _read_data_sql(carrera_name):
         conn.close() 
     else:
         logger.info('Consultando en la BD todas las carreras')
-        cur = conn.cursor() 
+        cur = conn.cursor()
         cur.execute("select * from  formulario " ) 
-        output = cur.fetchall()      
+        output = cur.fetchall()     
+        df = pd.DataFrame(output,columns=(i[0] for i in cur.description))
         conn.close() 
     
     
-    df = pd.DataFrame(output)
-
+    
+   
     #Leemos el archvo csv y lo devolvemos el data frame
     return df
 
