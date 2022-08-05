@@ -16,10 +16,10 @@ def _extract(_carrera):
     subprocess.run(['python', 'main.py', _carrera], cwd='./extract')
 
 def _transform():
-    logger.info('..::Iniciando el proceso de extracción::..')
+    logger.info('..::Iniciando el proceso de transformación::..')
 
 def _load():
-    logger.info('..::Iniciando el proceso de extracción::..')
+    logger.info('..::Iniciando el proceso de carga::..')
 
 ##################################################################################
 # Inicio de la aplicación #
