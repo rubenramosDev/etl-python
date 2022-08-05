@@ -34,7 +34,7 @@ def main(_carrera):
     df = _read_data_sql(_carrera)
 
     #Invocamos a la función que guarda los datos del DataFrame en un archivo csv
-   # _save_data_to_csv(df)
+    _save_data_to_csv(df)
     
     #Devolvemos el dataFrame resultante
     return df
@@ -59,6 +59,7 @@ def _read_data_sql(carrera_name):
         cur = conn.cursor() 
         cur.execute("select * from  formulario where pregunta_5 = %s", [carrera] ) 
         output = cur.fetchall()      
+        df = pd.DataFrame(output,columns=(i[0] for i in cur.description))
         conn.close() 
     else:
         logger.info('Consultando en la BD todas las carreras')
@@ -67,14 +68,16 @@ def _read_data_sql(carrera_name):
         output = cur.fetchall()     
         df = pd.DataFrame(output,columns=(i[0] for i in cur.description))
         conn.close() 
-    
-    
-    
-   
-    #Leemos el archvo csv y lo devolvemos el data frame
+
     return df
 
-
+def _save_data_to_csv(df):
+    now = datetime.datetime.now().strftime('%Y_%m_%d')
+    out_file_name = 'EncuestasVendido_{fdatetime}.csv'.format(
+         fdatetime=now)
+    logger.info('Guardando el dataset: {}'.format(out_file_name))
+    df.to_csv(out_file_name)
+    
 ##################################################################################
 # Inicio de la aplicación #
 ##################################################################################
