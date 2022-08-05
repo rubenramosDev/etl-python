@@ -10,7 +10,7 @@ def mysqlconnect():
             host='localhost', 
             user='root',  
             password = "root", 
-            db='encuentacovid', 
+            db='encuestacovid', 
             ) 
         print("Se hizo la conexion a la base de datos encuestacovid")
         return conn
