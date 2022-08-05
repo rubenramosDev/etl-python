@@ -17,19 +17,21 @@ import pymysql
 import pandas as pd
 from sqlalchemy import create_engine
 
-from config import connection
+from config import mysqlconnect
 
 from functools import reduce   
 #Obtenemos una referencia al logger
 logger = logging.getLogger(__name__)
-
+#Instanceamos la conexion a la BD
+conn=mysqlconnect()
 
 #Definimos la Función principal
 def main(_carrera):
     logger.info('Iniciando Proceso de Extracción...')
+    
 
     #Invocamos a la función para leer los datos.
-    df = _read_data_sql(_carrera,connection)
+    df = _read_data_sql(_carrera)
 
     #Invocamos a la función que guarda los datos del DataFrame en un archivo csv
    # _save_data_to_csv(df)
@@ -40,35 +42,50 @@ def main(_carrera):
 ####################################################################
 #              Función para leer los datos del Data Set            #
 ####################################################################
-def _read_data_sql(carrera_name,connection):
-    #logger.info('Leyendo el archivo {}'.format(file_name))
-    sql=('select * from  formulario where pregunta_5=?',carrera_name)
+def _read_data_sql(carrera_name):
     
-    df = pd.read_sql_query(sql, con=connection)
+    carrera =""
+    if(carrera_name =="IDGS" or carrera_name =="idgs"):
+        carrera="Ingenieria en Desarrollo y Gestion de Software"
+        logger.info('Consultando en la BD sobre la carrera {}'.format(carrera))
+    elif (carrera_name=="IRC" or carrera_name=="irc"):
+         carrera="Ingeniería en Redes y Ciberseguridad"
+         logger.info('Consultando en la BD sobre la carrera {}'.format(carrera))
+    elif (carrera_name=="IEVND" or carrera_name=="IEVND"):
+          carrera="Ingeniería en Entornos Virtuales y Negocios Digitales"
+          logger.info('Consultando en la BD sobre la carrera {}'.format(carrera))
+    
+    if(carrera_name!="Todas"):
+        cur = conn.cursor() 
+        cur.execute("select * from  formulario where pregunta_5 = %s", [carrera] ) 
+        output = cur.fetchall()      
+        conn.close() 
+    else:
+        logger.info('Consultando en la BD todas las carreras')
+        cur = conn.cursor() 
+        cur.execute("select * from  formulario " ) 
+        output = cur.fetchall()      
+        conn.close() 
+    
+    
+    df = pd.DataFrame(output)
 
     #Leemos el archvo csv y lo devolvemos el data frame
     return df
 
 
-####################################################################
-#   Función  unir en un solo dataframe los archivos csv #
-####################################################################
-
-    
-##################################################################################
-# Función que guarda los datos del DataFrame en un archivo csv #
-##################################################################################
-
 ##################################################################################
 # Inicio de la aplicación #
 ##################################################################################
 if __name__ == '__main__':
+    
+    
     #Creamos un nuevo parser de argumentos
     parser = argparse.ArgumentParser()
   
     parser.add_argument('carrera_name',
                          help='La ruta al dataset sucio',
-                         type=str)
+                        type=str)
     
     #Parseamos los argumentos.
     args = parser.parse_args()
