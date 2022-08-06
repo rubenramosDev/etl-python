@@ -28,6 +28,9 @@ SET time_zone = "+00:00";
 -- Estructura de tabla para la tabla `estados`
 --
 
+CREATE DATABASE encuestacovid;
+USE encuestacovid;
+
 CREATE TABLE `estados` (
   `id_estados` int(11) NOT NULL,
   `estados` varchar(30) DEFAULT NULL
