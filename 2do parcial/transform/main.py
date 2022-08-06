@@ -70,7 +70,7 @@ def _limpieza_datos(df):
     missing_tittles = df.fillna(value='Anonimo')
     df.loc[missingTitlesMask, 'proveedor'] = missing_tittles.iloc[:len(missing_tittles)]
 
-    return df
+    return df 
 
 def _obtener_tokens(df):
     logger.info('Obteniendo cantidad y tokens del nombre del producto')
@@ -143,4 +143,5 @@ if __name__ == '__main__':
     #Mostramos el Data Frame
     print("-------------- DataFrame Completo --------------")
     print(df)
+    
     
