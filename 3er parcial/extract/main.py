@@ -76,7 +76,7 @@ def _save_data_to_csv(df):
     out_file_name = 'EncuestasCovid_{fdatetime}.csv'.format(
          fdatetime=now)
     logger.info('Guardando el dataset: {}'.format(out_file_name))
-    df.to_csv(out_file_name)
+    df.to_csv(out_file_name, encoding='utf-8-sig')
     
 ##################################################################################
 # Inicio de la aplicación #
