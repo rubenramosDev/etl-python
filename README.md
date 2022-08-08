@@ -17,7 +17,7 @@
 - [ ] En cada columna revisar que no existan datos faltantes y en dado caso reemplazar por el valor más adecuado en cada caso.
 - [ ] Tokens: Palabras principales (Tokens) encontradas en la pregunta 30 eliminando los stopwords para español
 - [x] Pregunta 1 a 7 Jonathan
-- [ ] Pregunta 8 a 15 Christo
+- [x] Pregunta 8 a 15 Christo
 - [ ] Pregunta 16 a 22 Esau
 - [ ] Pregunta 23 a 30 Ercik
 

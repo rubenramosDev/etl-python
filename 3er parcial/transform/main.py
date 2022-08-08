@@ -17,6 +17,7 @@ def main(file_name):
     df = _read_data(file_name)
     
     _trnsPregunta1_7(df)
+    _trnsPregunta8_15(df)
     _save_data_to_csv(df, file_name)
     
     return df
@@ -34,6 +35,77 @@ def _trnsPregunta1_7(df):
     # Sexo con nombre o caracter F o M
     df["pregunta_4"] = df["pregunta_4"].apply(lambda sexo: "M" if sexo == "Masculino" else "F")
     
+    return df
+
+def _trnsPregunta8_15(df):
+
+    # Pregunta 8 con cambio a: 
+    #   Compartido
+    df["pregunta_8"] = df["pregunta_8"].apply(
+    lambda opcion: "Compartido" if opcion == "Era Compartido" else (
+                   "Si" if opcion == "Si" else "No"))
+
+    # Pregunta 10 con cambios a: 
+    #   50 a 100
+    #   101 a 300
+    #   301 a 500
+    #   501 o más
+    df["pregunta_10"] = df["pregunta_10"].apply(
+    lambda opcion: "50 a 100" if opcion == "50 a 100 pesos" else (
+                   "101 a 300" if opcion == "101 a 300 pesos" else (
+                   "301 a 500" if opcion == "301 a 500 pesos" else 
+                   "501 o más")))
+
+    # Pregunta 13 con cambios a frases: 
+    #   Correo electrónico 
+    #   Plataformas como classroom, teams, etc. 
+    df["pregunta_13"] = df["pregunta_13"].apply(
+    lambda opcion: "Correo electrónico,Plataformas como classroom, teams, etc.,Grupos de WhatsApp," 
+        if opcion == "Vía correo electrónico,Plataformas como classroom, teams, etc,Grupos de WhatsApp," 
+        
+        else ("Correo electrónico,Plataformas como classroom, teams, etc.," 
+        if opcion == "Vía correo electrónico,Plataformas como classroom, teams, etc," 
+        
+        else ("Plataformas como classroom, teams, etc.,Grupos de WhatsApp," 
+        if opcion == "Plataformas como classroom, teams, etc,Grupos de WhatsApp," 
+        
+        else ("Plataformas como classroom, teams, etc.," 
+        if opcion == "Plataformas como classroom, teams, etc,"
+
+        else ("Correo electrónico," 
+        if opcion == "Vía correo electrónico,"
+
+        else "Ninguno"
+        
+        )))))
+
+    # Pregunta 15 con cambios a frases: 
+    #   Elaboración de trabajos, proyectos y casos
+    df["pregunta_15"] = df["pregunta_15"].apply(
+    lambda opcion: "Examen oral,Examen en línea,Prueba escrita abierta,Elaboración de trabajos, proyectos y casos," 
+        if opcion == "Examen oral,Examen en línea,Prueba escrita abierta,Elaboración de trabajos, proyectos, casos," 
+        
+        else ("Examen en línea,Prueba escrita abierta,Elaboración de trabajos, proyectos y casos," 
+        if opcion == "Examen en línea,Prueba escrita abierta,Elaboración de trabajos, proyectos, casos," 
+        
+        else ("Examen oral,Prueba escrita abierta,Elaboración de trabajos, proyectos y casos," 
+        if opcion == "Examen oral,Prueba escrita abierta,Elaboración de trabajos, proyectos, casos," 
+        
+        else ("Examen oral,Examen en línea,Elaboración de trabajos, proyectos y casos," 
+        if opcion == "Examen oral,Examen en línea,Elaboración de trabajos, proyectos, casos,"
+
+        else ("Examen en línea,Elaboración de trabajos, proyectos y casos," 
+        if opcion == "Examen en línea,Elaboración de trabajos, proyectos, casos,"
+
+        else ("Examen en línea,Prueba escrita abierta," 
+        if opcion == "Examen en línea,Prueba escrita abierta,"
+
+        else ("Examen oral,Examen en línea," 
+        if opcion == "Examen oral,Examen en línea," 
+        
+        else "Examen en línea,"
+        )))))))
+
     return df
 
 def valiFecha(fecha):

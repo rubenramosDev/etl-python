@@ -16,7 +16,6 @@ def _extract(_carrera):
     subprocess.run(['python', 'main.py', _carrera], cwd='./extract')
     subprocess.run(['move', r'extract\*.csv', r'transform'], shell=True)
 
-
 def _transform():
     logger.info('..::Iniciando el proceso de transformación::..')
 
