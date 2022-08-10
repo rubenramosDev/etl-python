@@ -7,6 +7,8 @@ from urllib.parse import urlparse
 import hashlib
 import argparse
 import logging
+from nltk.corpus import stopwords
+
 logging.basicConfig(level=logging.INFO)
 
 # Obtenemos una referencia al logger
@@ -20,7 +22,6 @@ def main(file_name):
     _trnsPregunta1_7(df)
     _trnsPregunta8_15(df)
     _trnsPregunta23_30(df)
-    _save_data_to_csv(df, file_name)
 
     return df
 
@@ -46,8 +47,10 @@ def _trnsPregunta8_15(df):
     # Pregunta 8 con cambio a:
     #   Compartido
     df["pregunta_8"] = df["pregunta_8"].apply(
-        lambda opcion: "Compartido" if opcion == "Era Compartido" else (
-            "Si" if opcion == "Si" else "No"))
+        lambda opcion: "Compartido"
+        if opcion == "Era Compartido"
+        else ("Si" if opcion == "Si"
+              else "No"))
 
     # Pregunta 10 con cambios a:
     #   50 a 100
@@ -115,17 +118,36 @@ def _trnsPregunta8_15(df):
 
 def _trnsPregunta23_30(df):
     # Pregunta 23 con cambios a:
-    #   Mas que si hubiera ido a clase a Más que si hubiera ido a clase
     df["pregunta_23"] = df["pregunta_23"].apply(
-        lambda opcion: "50 a 100"
-        if opcion == ""
-        else ("Más que si hubiera ido a clase")
-    )
+        lambda opcion: "Más que si hubiera ido a clase"
 
-    # Duda pregunta 28
-    # Duda pregunta 30
+        if opcion == "Mas que si hubiera ido a clase"
+        else (
+            "Igual que si hubiera ido a clase" if opcion == "Igual que si hubiera ido a clase"
+            else "Menos que si hubiera ido a clase"
+        ))
 
+    df['Tokens'] = tokenize_column(df, 'pregunta_30')
     return df
+
+
+stop_words = set(stopwords.words('spanish'))
+
+
+def tokenize_column(df, column_name, isCant=False):
+    return (df.dropna()
+            .apply(lambda row: nltk.word_tokenize(row[column_name]), axis=1)
+            .apply(lambda tokens: list(filter(lambda token: token.isalpha(), tokens)))
+            .apply(lambda tokens: list(map(lambda token: token.lower(), tokens)))
+            .apply(lambda word_list: list(filter(lambda word: word not in stop_words, word_list)))
+            .apply(lambda valid_word_list: len(valid_word_list))
+            ) if isCant else (df.dropna()
+                              .apply(lambda row: nltk.word_tokenize(row[column_name]), axis=1)
+                              .apply(lambda tokens: list(filter(lambda token: token.isalpha(), tokens)))
+                              .apply(lambda tokens: list(map(lambda token: token.lower(), tokens)))
+                              .apply(lambda word_list: list(filter(lambda word: word not in stop_words, word_list)))
+                              .apply(lambda valid_word_list: ",".join(valid_word_list))
+                              )
 
 
 def valiFecha(fecha):
@@ -172,13 +194,6 @@ def _read_data(file_name):
     return pd.read_csv(file_name,  encoding='utf-8')
 
 
-def _save_data_to_csv(df, filename):
-    clean_filename = 'clean_{}'.format(filename)
-    logger.info(
-        'Guardando los datos limpios en el archivo: {}'.format(clean_filename))
-    df.to_csv(clean_filename)
-
-
 # Inicio de la aplicación #
 if __name__ == '__main__':
     # Creamos un nuevo parser de argumentos
@@ -192,4 +207,4 @@ if __name__ == '__main__':
 
     # Mostramos el Data Frame
     print("-------------- DataFrame Completo --------------")
-    print(df)
+    # print(df)
