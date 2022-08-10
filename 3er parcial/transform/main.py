@@ -22,6 +22,7 @@ def main(file_name):
 
     _trnsPregunta1_7(df)
     _trnsPregunta8_15(df)
+    _trnsPregunta16_22(df)
     _trnsPregunta23_30(df)
     _save_data_to_csv(df, file_name)
 
@@ -151,6 +152,102 @@ def tokenize_column(df, column_name, isCant=False):
                               .apply(lambda valid_word_list: ",".join(valid_word_list))
                               )
 
+
+def _trnsPregunta16_22(df):
+    
+    # limpieza pregunta 16
+    df["pregunta_16"] = df["pregunta_16"].apply(
+    lambda opcion: "Examen oral,Examen en línea,Prueba escrita abierta,Elaboración de trabajos, proyectos y casos," 
+        if opcion == "Examen oral,Examen en línea,Prueba escrita abierta,Elaboración de trabajos, proyectos, casos," 
+        
+        else ("Examen en línea,Prueba escrita abierta,Elaboración de trabajos, proyectos y casos," 
+        if opcion == "Examen en línea,Prueba escrita abierta,Elaboración de trabajos, proyectos, casos," 
+        
+        else ("Examen oral,Prueba escrita abierta,Elaboración de trabajos, proyectos y casos," 
+        if opcion == "Examen oral,Prueba escrita abierta,Elaboración de trabajos, proyectos, casos," 
+        
+        else ("Examen oral,Examen en línea,Elaboración de trabajos, proyectos y casos," 
+        if opcion == "Examen oral,Examen en línea,Elaboración de trabajos, proyectos, casos,"
+
+        else ("Examen en línea,Elaboración de trabajos, proyectos y casos," 
+        if opcion == "Examen en línea,Elaboración de trabajos, proyectos, casos,"
+
+        else ("Examen en línea,Prueba escrita abierta," 
+        if opcion == "Examen en línea,Prueba escrita abierta,"
+
+        else ("Examen oral,Examen en línea," 
+        if opcion == "Examen oral,Examen en línea," 
+        
+        else "Examen en línea,"
+        )))))))
+    
+    # limpieza pregunta 17
+    df["pregunta_17"] = df["pregunta_17"].apply(
+    lambda opcion: "Examen oral,Examen en línea,Prueba escrita abierta,Elaboración de trabajos, proyectos y casos," 
+        if opcion == "Examen oral,Examen en línea,Prueba escrita abierta,Elaboración de trabajos, proyectos, casos," 
+        
+        else ("Examen en línea,Prueba escrita abierta,Elaboración de trabajos, proyectos y casos," 
+        if opcion == "Examen en línea,Prueba escrita abierta,Elaboración de trabajos, proyectos, casos," 
+        
+        else ("Examen oral,Prueba escrita abierta,Elaboración de trabajos, proyectos y casos," 
+        if opcion == "Examen oral,Prueba escrita abierta,Elaboración de trabajos, proyectos, casos," 
+        
+        else ("Examen oral,Examen en línea,Elaboración de trabajos, proyectos y casos," 
+        if opcion == "Examen oral,Examen en línea,Elaboración de trabajos, proyectos, casos,"
+
+        else ("Examen en línea,Elaboración de trabajos, proyectos y casos," 
+        if opcion == "Examen en línea,Elaboración de trabajos, proyectos, casos,"
+
+        else ("Examen en línea,Prueba escrita abierta," 
+        if opcion == "Examen en línea,Prueba escrita abierta,"
+
+        else ("Examen oral,Examen en línea," 
+        if opcion == "Examen oral,Examen en línea," 
+        
+        else "Examen en línea,"
+        )))))))
+    
+    # limpieza pregunta 18
+    # get value of pregunta 18
+    v18 = df["pregunta_18"].values.map(lambda x: x.split(","))
+    list_18_values = [
+        "Problemas de conexión"
+        "Dificultad para preguntar dudas durante el examen"
+        "Nervios adicionales por la incertidumbre ante la evaluación online"
+        "Excesiva carga de trabajo"
+        "Exámenes escritos a resolver en tiempo reducido"
+        "Coincidencia de entregar de trabajos de distintas asignaturas"
+    ]
+    df["pregunta_18"] = v18.apply(lambda x: x if x in list_18_values else "Null")
+    
+    # limpieza pregunta 19 a 21
+    list_19_20_values = [
+        'Mucho',
+        'Regular',
+        'Poco',
+        'Muy poco'
+    ]
+    # if pregunta 19 is not in list_19_values, set it to "Null"
+    df["pregunta_19"] = df["pregunta_19"].apply(lambda x: x if x in list_19_20_values else "Null")
+    
+    # limpieza pregunta 20
+    df["pregunta_20"] = df["pregunta_20"].apply(lambda x: x if x in list_19_20_values else "Null")
+    
+    # limpieza pregunta 21
+    df["pregunta_21"] = df["pregunta_21"].apply(lambda x: x if x in list_19_20_values else "Null")
+    
+    # limpieza pregunta 22
+    list_22_values = [
+        'De 3 a 4 horas'
+        'De 5 a 6 horas'
+        'De 6 a 7 horas'
+        'Mas de 7 horas'
+    ]
+    # search for "Mas de 7 horas" and replace it with "Más de 7 horas"
+    df["pregunta_22"] = df["pregunta_22"].apply(lambda x: x.replace("Mas de 7 horas", "Más de 7 horas"))
+    df["pregunta_22"] = df["pregunta_22"].apply(lambda x: x if x in list_22_values else "Null")
+    
+    return df
 
 def valiFecha(fecha):
     """
