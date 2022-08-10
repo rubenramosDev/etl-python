@@ -1,3 +1,4 @@
+import datetime
 import logging
 import subprocess
 import argparse
@@ -17,10 +18,28 @@ def _extract(_carrera):
     subprocess.run(['move', r'extract\*.csv', r'transform'], shell=True)
 
 def _transform():
+   
     logger.info('..::Iniciando el proceso de transformación::..')
-
+    now = datetime.datetime.now().strftime('%Y_%m_%d')
+    dirty_data_filename = 'EncuestasCovid_{datetime}.csv'.format(
+         datetime=now)
+    subprocess.run(
+            ['python', 'main.py', dirty_data_filename], cwd='./transform')
+    subprocess.run(['del', dirty_data_filename],
+                       shell=True, cwd='./transform')
+    subprocess.run(['move', r'transform\*.csv', r'load'], shell=True)
+   
 def _load():
     logger.info('..::Iniciando el proceso de carga::..')
+    now = datetime.datetime.now().strftime('%Y_%m_%d')
+
+    clean_data_filename = 'clean_EncuestasCovid_{datetime}.csv'.format(
+             datetime=now)
+    #Corremos un subproceso para ejecutar el tercer programa en la carpeta /extract
+    subprocess.run(
+            ['python', 'main.py', clean_data_filename], cwd='./load')
+    #Eliminar el archivo csv limpio
+    subprocess.run(['del', clean_data_filename], shell=True, cwd='./load')
 
 ##################################################################################
 # Inicio de la aplicación #
