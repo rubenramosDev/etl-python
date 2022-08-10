@@ -9,6 +9,7 @@ import argparse
 import logging
 from nltk.corpus import stopwords
 
+
 logging.basicConfig(level=logging.INFO)
 
 # Obtenemos una referencia al logger
@@ -22,6 +23,7 @@ def main(file_name):
     _trnsPregunta1_7(df)
     _trnsPregunta8_15(df)
     _trnsPregunta23_30(df)
+    _save_data_to_csv(df, file_name)
 
     return df
 
@@ -193,7 +195,11 @@ def _read_data(file_name):
     # Leemos el archvo csv y lo devolvemos el data frame
     return pd.read_csv(file_name,  encoding='utf-8')
 
-
+def _save_data_to_csv(df, filename):
+    clean_filename = 'clean_{}'.format(filename)
+    logger.info('Guardando los datos limpios en el archivo: {}'.format(clean_filename))
+    df.to_csv(clean_filename)
+    
 # Inicio de la aplicación #
 if __name__ == '__main__':
     # Creamos un nuevo parser de argumentos
@@ -207,4 +213,6 @@ if __name__ == '__main__':
 
     # Mostramos el Data Frame
     print("-------------- DataFrame Completo --------------")
-    # print(df)
+    print(df)
+
+    
