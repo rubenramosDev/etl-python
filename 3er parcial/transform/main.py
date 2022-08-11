@@ -239,13 +239,13 @@ def _trnsPregunta16_22(df):
     
     # limpieza pregunta 22
     list_22_values = [
-        'De 3 a 4 horas'
-        'De 5 a 6 horas'
-        'De 6 a 7 horas'
-        'Mas de 7 horas'
+        'De 3 a 4 horas',
+        'De 5 a 6 horas',
+        'De 6 a 7 horas',
+        'Más de 7 horas',
     ]
     # search for "Mas de 7 horas" and replace it with "Más de 7 horas"
-    df["pregunta_22"] = df["pregunta_22"].apply(lambda x: x.replace("Mas de 7 horas", "Más de 7 horas"))
+    df["pregunta_22"] = df["pregunta_22"].apply(lambda x: "Más de 7 horas" if x == 'Mas de 7 horas' else x)
     df["pregunta_22"] = df["pregunta_22"].apply(lambda x: x if x in list_22_values else "Null")
     
     return df
