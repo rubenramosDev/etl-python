@@ -209,15 +209,16 @@ def _trnsPregunta16_22(df):
     
     # limpieza pregunta 18
     # get value of pregunta 18
-    v18 = df["pregunta_18"].values.map(lambda x: x.split(","))
-    list_18_values = [
-        "Problemas de conexión"
-        "Dificultad para preguntar dudas durante el examen"
-        "Nervios adicionales por la incertidumbre ante la evaluación online"
-        "Excesiva carga de trabajo"
-        "Exámenes escritos a resolver en tiempo reducido"
-        "Coincidencia de entregar de trabajos de distintas asignaturas"
-    ]
+    # v18 = df["pregunta_18"].values.map(lambda x: x.split(","))
+    # list_18_values = [
+    #     "Problemas de conexión"
+    #     "Dificultad para preguntar dudas durante el examen"
+    #     "Nervios adicionales por la incertidumbre ante la evaluación online"
+    #     "Excesiva carga de trabajo"
+    #     "Exámenes escritos a resolver en tiempo reducido"
+    #     "Coincidencia de entregar de trabajos de distintas asignaturas"
+    # ]
+    
     df["pregunta_18"] = v18.apply(lambda x: x if x in list_18_values else "Null")
     
     # limpieza pregunta 19 a 21
