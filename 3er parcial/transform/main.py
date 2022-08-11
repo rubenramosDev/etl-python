@@ -219,7 +219,7 @@ def _trnsPregunta16_22(df):
     #     "Coincidencia de entregar de trabajos de distintas asignaturas"
     # ]
     
-    df["pregunta_18"] = v18.apply(lambda x: x if x in list_18_values else "Null")
+    # df["pregunta_18"] = v18.apply(lambda x: x if x in list_18_values else "Null")
     
     # limpieza pregunta 19 a 21
     list_19_20_values = [
